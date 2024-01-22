@@ -8,8 +8,8 @@ def dosort():
     # REMEMBER!!! If you go off the end of the list, python will crash!
 
     # this skeleton code makes a variable i go from 0 to 8 once
-    # and swaps the block at position i with the next one over
-    # essentially, it moves the first block to the end.
+    # it swaps the block at position i with the next one over
+    # essentially, it moves the first block to the end one position at a time.
     for i in range(9):
         swap(i, i + 1)
 
@@ -41,22 +41,23 @@ def check_events():
 
 # Swap two blocks (and update the visualization)
 def swap(left, right):
-    display.fill(pg.Color("#CBC3E3"))  # clear the window
 
     # swap the blocks
+    print(f"before: {blocks} ", end="")  # to help with debugging
     tmp = blocks[left]
     blocks[left] = blocks[right]
     blocks[right] = tmp
-    print(blocks)
+    print(f"after: {blocks}")  # to help with debugging
 
     # draw the blocks
+    display.fill(pg.Color("#CBC3E3"))  # clear the window
     for i, len in enumerate(blocks):
         # pg.draw.rect(display_window, color_of_rectangle, (left, top, width, height))
         pg.draw.rect(display, colors[len - 1],
                      (60 + i * 50, 550 - 50 * len, 50, 50 * len))
     pg.display.flip()
     check_events()
-    pg.time.wait(1000)  # slow down the visualization
+    pg.time.wait(500)  # slow down the visualization
 
 
 if __name__ == "__main__":
@@ -69,3 +70,4 @@ if __name__ == "__main__":
             check_events()
     except Exception as error:
         print("An exception occurred:", type(error).__name__)
+        
